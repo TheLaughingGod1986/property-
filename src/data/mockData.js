@@ -5,7 +5,6 @@ export const mockPropertyData = [
     postcode: "SW1A 1AA",
     type: "Apartment",
     price: 350000,
-    monthlyRent: 1500,
     yield: (1500 * 12 / 350000) * 100,
     roi: ((1500 * 12) - 3500) / 350000 * 100
   },
