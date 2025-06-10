@@ -1,9 +1,5 @@
 .App {
   text-align: center;
-  font-family: Arial, sans-serif;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
 }
 
 .App-logo {
@@ -26,17 +22,6 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-  margin-bottom: 30px;
-}
-
-.App-header h1 {
-  color: #2c3e50;
-  margin-bottom: 10px;
-}
-
-.App-header p {
-  color: #7f8c8d;
-  margin-top: 0;
 }
 
 .App-link {
@@ -50,24 +35,4 @@
   to {
     transform: rotate(360deg);
   }
-}
-
-.App-main {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-}
-
-.loading {
-  margin: 20px 0;
-  font-style: italic;
-  color: #7f8c8d;
-}
-
-.error {
-  margin: 20px 0;
-  color: #e74c3c;
-  padding: 10px;
-  background-color: #fadbd8;
-  border-radius: 4px;
 }

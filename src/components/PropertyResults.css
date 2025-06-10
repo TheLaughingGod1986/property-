@@ -1,0 +1,39 @@
+.property-results {
+  margin-top: 20px;
+}
+
+.property-results h2 {
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+.results-table-container {
+  overflow-x: auto;
+}
+
+.results-table {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.results-table th,
+.results-table td {
+  padding: 12px 15px;
+  text-align: left;
+}
+
+.results-table thead {
+  background-color: #3498db;
+  color: white;
+}
+
+.results-table tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+.results-table tr:hover {
+  background-color: #eaf2f8;
+}
