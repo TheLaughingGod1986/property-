@@ -1,54 +1,46 @@
-import React, { useState } from 'react';
-import './App.css';
+import React, { useState, useEffect, useCallback } from 'react';
 import PropertySearch from './components/PropertySearch';
 import PropertyResults from './components/PropertyResults';
-import { mockPropertyData } from './data/mockData';
+import { fetchPropertyData } from './data/apidata';
 
 function App() {
-  const [searchResults, setSearchResults] = useState([]);
+  const [properties, setProperties] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const handleSearch = (postcode) => {
-    setIsLoading(true);
-    setError(null);
-    
-    // Simulate API call with timeout
-    setTimeout(() => {
-      try {
-        // Filter mock data based on postcode
-        const results = mockPropertyData.filter(
-          property => property.postcode.toLowerCase().includes(postcode.toLowerCase())
-        );
-        
-        setSearchResults(results);
-        setIsLoading(false);
-        
-        if (results.length === 0) {
-          setError("No properties found for this postcode");
-        }
+  const loadProperties = useCallback(async () => {
+        setIsLoading(true);
+    try {
+        const data = await fetchPropertyData();
+        setProperties(data);
+        setError(null);
       } catch (err) {
-        setError("Error searching properties");
+        console.error('Failed to fetch properties:', err);
+setError(`Failed to load property data: ${err.message || 'Please try again later.'}`);
+      } finally {
         setIsLoading(false);
       }
-    }, 1000);
-  };
+  }, []);
+
+  useEffect(() => {
+    loadProperties();
+  }, [loadProperties]);
 
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Property Yield Calculator</h1>
-        <p>Find investment properties and calculate ROI by postcode</p>
+        <h1>UK Property Investment Calculator</h1>
       </header>
-      
-      <main className="App-main">
-        <PropertySearch onSearch={handleSearch} />
+      <main>
+        <PropertySearch />
         
-        {isLoading && <div className="loading">Loading...</div>}
-        {error && <div className="error">{error}</div>}
+        {isLoading && <p>Loading properties...</p>}
+        {error && <p className="error-message">{error}</p>}
         
-        {!isLoading && !error && searchResults.length > 0 && (
-          <PropertyResults properties={searchResults} />
+        {!isLoading && !error && (
+          properties.length > 0
+            ? <PropertyResults properties={properties} />
+            : <p>No properties found.</p>
         )}
       </main>
     </div>
